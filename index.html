@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>State Eligibility Matrix: Check whether a consumer can be enrolled in a state and whether a proposed fee fits the state cap, from a versioned, citable, editable dataset</title>
+<meta name="description" content="Check whether a consumer can be enrolled in a state and whether a proposed fee fits the state cap, from a versioned, citable, editable dataset. Reference data only, not legal advice.">
+<meta name="keywords" content="debt settlement state fee caps, debt relief state eligibility checker, state debt settlement licensing, percent of debt vs percent of savings fee cap">
+<meta name="author" content="Amir Hussain">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://aamirtechs.github.io/state-eligibility-matrix/">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#0b1f3a">
+<meta property="og:type" content="website">
+<meta property="og:title" content="State Eligibility Matrix">
+<meta property="og:description" content="Check whether a consumer can be enrolled in a state and whether a proposed fee fits the state cap, from a versioned, citable, editable dataset. Reference data only, not legal advice.">
+<meta property="og:url" content="https://aamirtechs.github.io/state-eligibility-matrix/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="State Eligibility Matrix">
+<meta name="twitter:description" content="Check whether a consumer can be enrolled in a state and whether a proposed fee fits the state cap, from a versioned, citable, editable dataset. Reference data only, not legal advice.">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "State Eligibility Matrix", "applicationCategory": "BusinessApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@type": "Person", "name": "Amir Hussain", "url": "https://aamirtechs.com"}, "url": "https://aamirtechs.github.io/state-eligibility-matrix/", "description": "Check whether a consumer can be enrolled in a state and whether a proposed fee fits the state cap, from a versioned, citable, editable dataset. Reference data only, not legal advice."}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0b1f3a;--navy2:#122c50;--gold:#d4a72c;--ink:#16233a;--muted:#5a6a84;--line:#e3e9f2;--bg:#f6f8fb;--card:#ffffff}
+*{box-sizing:border-box}body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:44px 20px 34px;text-align:center}
+header h1{font-family:'Sora',sans-serif;font-size:2rem;margin:0 0 10px}header h1 span{color:var(--gold)}
+header p{max-width:720px;margin:0 auto 16px;color:#dbe4f2}
+.stats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.stats span{border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:5px 14px;font-size:.85rem}
+main{max-width:980px;margin:-18px auto 0;padding:0 16px 30px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:0 8px 30px rgba(11,31,58,.08)}
+label{display:block;font-weight:700;font-size:.9rem;margin:14px 0 6px}
+textarea,input[type=text],input[type=number],select{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font:inherit;background:#fff}
+textarea{min-height:150px;font-family:ui-monospace,Menlo,monospace;font-size:.85rem}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.btn-run{background:var(--gold);color:var(--navy);border:0;border-radius:9px;padding:12px 22px;font-weight:800;cursor:pointer;font-size:1rem;margin-top:16px}
+.btn-sub{background:var(--navy);color:#fff;border:0;border-radius:9px;padding:10px 16px;font-weight:700;cursor:pointer;margin:8px 8px 0 0}
+.btn-ghost{background:#fff;color:var(--navy);border:1px solid var(--navy);border-radius:9px;padding:9px 15px;font-weight:700;cursor:pointer;margin:8px 8px 0 0}
+table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.87rem}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:var(--navy);color:#fff}
+.flag{color:#b3261e;font-weight:700}.ok{color:#137333;font-weight:700}
+pre{background:#0b1f3a;color:#e8eef8;border-radius:10px;padding:14px;overflow:auto;font-size:.82rem;white-space:pre-wrap;word-break:break-word}
+.privacy{color:var(--muted);font-size:.9rem;margin-top:14px}
+section.how{max-width:980px;margin:22px auto;padding:0 16px}
+section.how h2{font-family:'Sora',sans-serif}
+footer{background:var(--navy);color:#dbe4f2;text-align:center;padding:24px 16px;margin-top:30px;font-size:.92rem}
+footer a{color:var(--gold)}
+.small{font-size:.85rem;color:var(--muted)}
+.warn{background:#fdf6e0;border:1px solid var(--gold);border-radius:10px;padding:12px 14px;margin-top:14px;font-size:.9rem}
+</style>
+</head>
+<body>
+<header>
+  <h1>State Eligibility <span>Matrix</span></h1>
+  <p>One versioned, citable dataset for: can we enroll this consumer, in this state, at what fee?</p>
+  <div class="stats"><span>Free</span><span>100% in your browser</span><span>No sign-up</span></div>
+</header>
+<main>
+  <div class="card">
+    <div class="warn"><strong>Reference data only, not legal advice.</strong> Every row below is editable reference data seeded from public sources. Verify each row against primary sources and with counsel before relying on it.</div>
+    <div class="row">
+      <div><label for="stateInput">State (2 letter code)</label><input type="text" id="stateInput" value="WA"></div>
+      <div><label for="debtInput">Enrolled debt</label><input type="number" id="debtInput" value="20000"></div>
+      <div><label for="savingsInput">Expected savings</label><input type="number" id="savingsInput" value="8000"></div>
+      <div><label for="feeInput">Proposed fee</label><input type="number" id="feeInput" value="4000"></div>
+    </div>
+    <button class="btn-run" id="runBtn">Check eligibility and fee</button>
+    <div id="verdict" style="margin-top:14px"></div>
+    <button class="btn-sub" id="dlBtn" type="button" style="display:none">Download verdict CSV</button>
+    <label for="datasetInput">Dataset (editable JSON, one row per state)</label>
+    <textarea id="datasetInput" style="min-height:260px"></textarea>
+    <div id="datasetTable"></div>
+    <label for="diffInput">Diff view: paste a second dataset JSON to compare with the dataset above</label>
+    <textarea id="diffInput" placeholder="Paste the newer or older dataset JSON here"></textarea>
+    <button class="btn-ghost" id="diffBtn" type="button">Show differences</button>
+    <div id="diffResults"></div>
+    <p class="privacy">Runs 100% in your browser. Your files never leave this device.</p>
+  </div>
+</main>
+<section class="how">
+  <h2>How it works</h2>
+  <ul>
+    <li>Built-in dataset covers about 15 high-volume states with availability, fee cap value and basis, a licensing note, a source URL and a last verified date per row.</li>
+    <li>Fee caps keep their basis: percent of enrolled debt and percent of savings are different numbers and are never conflated.</li>
+    <li>The checker returns one verdict: service unavailable, fee within cap, fee exceeds cap (with the excess amount), or insufficient data, always with the row citation.</li>
+    <li>The diff view lists every row and field that changed between two dataset versions, so a rule change is visible at a glance.</li>
+    <li>Seed values come from public summaries named in the README. This is editable reference data that must be verified with primary sources and counsel, never legal advice.</li>
+  </ul>
+</section>
+<footer>
+  <p>Built by Amir Hussain, operations manager and founder of <a href="https://aamirtechs.com" target="_blank" rel="noopener">AamirTechs: operations, customer support and e-commerce services</a>.</p>
+  <p><a href="https://github.com/aamirtechs" target="_blank" rel="noopener">More open source tools on GitHub</a></p>
+</footer>
+<script src="src/logic.js"></script>
+<script>
+var L = window.StateEligibilityMatrix;
+var lastVerdict = null;
+function esc(v){return String(v===null||v===undefined?"":v).replace(/</g,"&lt;");}
+function currentDataset(){
+  try { return L.parseDatasetJSON(document.getElementById("datasetInput").value); }
+  catch(e){ return L.cloneDataset(L.DEFAULT_DATASET); }
+}
+function renderTable(){
+  var ds = currentDataset();
+  var html = "<table><tr><th>State</th><th>Available</th><th>Fee cap</th><th>Basis</th><th>Licensing note</th><th>Source</th><th>Last verified</th></tr>";
+  ds.forEach(function(r){
+    html += "<tr><td><strong>"+esc(r.state)+"</strong></td><td>"+esc(r.service_available)+"</td><td>"+esc(r.fee_cap_value===null?"":r.fee_cap_value)+"</td><td>"+esc(r.fee_cap_basis)+"</td><td>"+esc(r.licensing_note)+"</td><td>"+esc(r.source_url)+"</td><td>"+esc(r.last_verified)+"</td></tr>";
+  });
+  document.getElementById("datasetTable").innerHTML = html + "</table>";
+}
+function num(id){ var v = document.getElementById(id).value; return v===""?null:Number(v); }
+function run(){
+  lastVerdict = L.checkEligibility(currentDataset(), {
+    state: document.getElementById("stateInput").value,
+    enrolledDebt: num("debtInput"), expectedSavings: num("savingsInput"), proposedFee: num("feeInput")
+  });
+  var cls = lastVerdict.verdict==="fee within cap" ? "ok" : "flag";
+  document.getElementById("verdict").innerHTML = "<p><strong>Verdict: </strong><span class=\""+cls+"\">"+esc(lastVerdict.verdict)+"</span></p><p>"+esc(lastVerdict.reason)+"</p>";
+  document.getElementById("dlBtn").style.display = "inline-block";
+  renderTable();
+}
+document.getElementById("datasetInput").value = JSON.stringify(L.DEFAULT_DATASET, null, 2);
+document.getElementById("runBtn").addEventListener("click", run);
+document.getElementById("datasetInput").addEventListener("change", renderTable);
+document.getElementById("diffBtn").addEventListener("click", function(){
+  var other;
+  try { other = L.parseDatasetJSON(document.getElementById("diffInput").value); }
+  catch(e){ document.getElementById("diffResults").innerHTML = "<p class=\"flag\">Could not parse that dataset JSON.</p>"; return; }
+  var diff = L.diffDatasets(currentDataset(), other);
+  if(!diff.length){ document.getElementById("diffResults").innerHTML = "<p>No differences found.</p>"; return; }
+  var html = "<table><tr><th>State</th><th>Field</th><th>Type</th><th>From</th><th>To</th></tr>";
+  diff.forEach(function(d){ html += "<tr><td>"+esc(d.state)+"</td><td>"+esc(d.field)+"</td><td>"+esc(d.type)+"</td><td>"+esc(d.from)+"</td><td>"+esc(d.to)+"</td></tr>"; });
+  document.getElementById("diffResults").innerHTML = html + "</table>";
+});
+document.getElementById("dlBtn").addEventListener("click", function(){
+  var blob = new Blob([L.buildVerdictCSV(lastVerdict)], {type:"text/csv"});
+  var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "eligibility-verdict.csv"; a.click(); URL.revokeObjectURL(a.href);
+});
+run();
+</script>
+</body>
+</html>
