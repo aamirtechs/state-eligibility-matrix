@@ -3,16 +3,21 @@ const test = require("node:test");
 const assert = require("node:assert");
 const L = require("../src/logic.js");
 
-test("built-in dataset covers 15 states and validates clean", () => {
-  assert.strictEqual(L.DEFAULT_DATASET.length, 15);
+test("built-in dataset covers 50 states and validates clean", () => {
+  assert.strictEqual(L.DEFAULT_DATASET.length, 50);
   assert.deepStrictEqual(L.validateDataset(L.DEFAULT_DATASET), []);
   const codes = L.DEFAULT_DATASET.map(r => r.state);
   ["CA", "TX", "FL", "NY", "WA", "IL", "CT", "DE", "ID", "MD", "MN", "MT", "OR", "VT", "WI"].forEach(c => {
     assert.ok(codes.indexOf(c) !== -1, c);
   });
   L.DEFAULT_DATASET.forEach(r => {
-    assert.ok(r.source_url.indexOf("http") === 0, r.state);
-    assert.strictEqual(r.last_verified, "2026-10-23");
+    if (r.source_url) {
+      assert.ok(r.source_url.indexOf("http") === 0, r.state);
+      assert.strictEqual(r.last_verified, "2026-10-23", r.state);
+    } else {
+      // Unverified placeholders ship without a citation until a contributor adds one.
+      assert.ok(r.licensing_note.toLowerCase().includes("unverified"), r.state);
+    }
   });
 });
 
@@ -55,11 +60,11 @@ test("verdict carries the row citation with source and last verified date", () =
 });
 
 test("diff view reports changed, added and removed rows by field", () => {
+  const base = L.cloneDataset(L.DEFAULT_DATASET).filter(r => r.state !== "NV");
   const changed = L.cloneDataset(L.DEFAULT_DATASET);
   changed.find(r => r.state === "WA").fee_cap_value = 20;
-  changed.push({ state: "NV", service_available: "yes", fee_cap_value: null, fee_cap_basis: "none", licensing_note: "", source_url: "https://example.com/nv", last_verified: "2026-10-23" });
   const trimmed = changed.filter(r => r.state !== "TX");
-  const diff = L.diffDatasets(L.DEFAULT_DATASET, trimmed);
+  const diff = L.diffDatasets(base, trimmed);
   const wa = diff.find(d => d.state === "WA" && d.field === "fee_cap_value");
   assert.strictEqual(wa.from, "15");
   assert.strictEqual(wa.to, "20");
@@ -70,7 +75,7 @@ test("diff view reports changed, added and removed rows by field", () => {
 
 test("dataset JSON round trip and verdict CSV", () => {
   const parsed = L.parseDatasetJSON(JSON.stringify(L.DEFAULT_DATASET));
-  assert.strictEqual(parsed.length, 15);
+  assert.strictEqual(parsed.length, 50);
   assert.strictEqual(parsed.find(r => r.state === "WA").fee_cap_value, 15);
   const csv = L.buildVerdictCSV(L.checkEligibility(L.DEFAULT_DATASET, { state: "WA", enrolledDebt: 20000, proposedFee: 4000 }));
   assert.ok(csv.indexOf("fee exceeds cap") !== -1);
