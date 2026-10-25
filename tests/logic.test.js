@@ -11,12 +11,11 @@ test("built-in dataset covers 50 states and validates clean", () => {
     assert.ok(codes.indexOf(c) !== -1, c);
   });
   L.DEFAULT_DATASET.forEach(r => {
-    if (r.source_url) {
-      assert.ok(r.source_url.indexOf("http") === 0, r.state);
-      assert.strictEqual(r.last_verified, "2026-10-23", r.state);
-    } else {
-      // Unverified placeholders ship without a citation until a contributor adds one.
-      assert.ok(r.licensing_note.toLowerCase().includes("unverified"), r.state);
+    assert.ok(r.source_url.indexOf("http") === 0, r.state);
+    assert.strictEqual(r.last_verified, "2026-10-23", r.state);
+    // Unverified placeholders must not claim the service is available.
+    if (r.licensing_note.toLowerCase().includes("unverified")) {
+      assert.notStrictEqual(r.service_available, "yes", r.state);
     }
   });
 });
