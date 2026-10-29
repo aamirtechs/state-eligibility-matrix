@@ -8,6 +8,7 @@ const LAST_VERIFIED = "2026-10-23";
 const SRC_STATE_TABLE = "https://www.lowincomeconsumers.org/_files/ugd/5b4010_5e1eb2f3b35946c7bafb034ab7a5793b.pdf";
 const SRC_WA = "https://www.curadebt.com/washington-debt-relief-how-to-reduce-your-finances/";
 const SRC_MARKET = "https://legalclarity.org/debt-settlement-solution-market-size-regulation-outlook/";
+const SRC_UNVERIFIED = "https://github.com/aamirtechs/state-eligibility-matrix";
 
 function row(state, available, capValue, capBasis, note, source) {
   return {
@@ -36,7 +37,42 @@ const DEFAULT_DATASET = [
   row("MT", "yes", null, "none", "Montana requires a 250 dollar annual registration, per the cited summary.", SRC_MARKET),
   row("OR", "no", null, "none", "Seed set marks service as unavailable, matching common program exclusions. Verify current Oregon rules before use.", SRC_MARKET),
   row("VT", "no", null, "none", "Seed set marks service as unavailable, matching common program exclusions. Verify current Vermont rules before use.", SRC_MARKET),
-  row("WI", "no", null, "none", "Seed set marks service as unavailable, matching common program exclusions. Verify current Wisconsin rules before use.", SRC_MARKET)
+  row("WI", "no", null, "none", "Seed set marks service as unavailable, matching common program exclusions. Verify current Wisconsin rules before use.", SRC_MARKET),
+  row("AL", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("MA", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("AK", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("AZ", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("AR", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("CO", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("GA", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("HI", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("IN", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("IA", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("KS", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("KY", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("LA", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("ME", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("MI", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("MS", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("MO", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("NE", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("NV", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("NH", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("NJ", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("NM", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("NC", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("ND", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("OH", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("OK", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("PA", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("RI", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("SC", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("SD", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("TN", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("UT", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("VA", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("WV", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED),
+  row("WY", "no", null, "none", "Unverified placeholder. Fill in fee caps and licensing with primary-source citations.", SRC_UNVERIFIED)
 ];
 
 function csvEscape(v) {
